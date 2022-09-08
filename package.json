@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/juicy-llamas/App-Autofill/issues"
   },
-  "homepage": "https://github.com/juicy-llamas/App-Autofill#readme"
+  "homepage": "https://github.com/juicy-llamas/App-Autofill#readme",
+  "dependencies": {
+    "promise-polyfill": "8.2.3"
+  },
+  "devDependencies": {
+    "sass": "^1.54.9"
+  }
 }
