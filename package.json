@@ -4,7 +4,7 @@
   "description": "A private project by Daniel Moylan, William Lee, Jeffrey Zhang, and Jonas Lorincz",
   "main": "index.js",
   "scripts": {
-    "test": "test"
+    "test": "sass --watch app/sass/style.sass app/style.css"
   },
   "repository": {
     "type": "git",
