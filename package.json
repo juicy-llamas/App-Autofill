@@ -2,9 +2,9 @@
   "name": "app-autofill",
   "version": "1.0.0",
   "description": "A private project by Daniel Moylan, William Lee, Jeffrey Zhang, and Jonas Lorincz",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
-    "test": "sass --watch app/sass/style.sass app/style.css"
+    "test": "sass --watch app/ui/menu/sass_src/style.sass app/ui/menu/css_out/style.css"
   },
   "repository": {
     "type": "git",
