@@ -1,0 +1,25 @@
+{
+  "name": "app-autofill",
+  "version": "1.0.0",
+  "description": "A private project by Daniel Moylan, William Lee, Jeffrey Zhang, and Jonas Lorincz",
+  "main": "index.js",
+  "scripts": {
+    "test": "sass --watch app/sass/style.sass app/style.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/juicy-llamas/App-Autofill.git"
+  },
+  "author": "Jonas Lorincz",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/juicy-llamas/App-Autofill/issues"
+  },
+  "homepage": "https://github.com/juicy-llamas/App-Autofill#readme",
+  "dependencies": {
+    "promise-polyfill": "8.2.3"
+  },
+  "devDependencies": {
+    "sass": "^1.54.9"
+  }
+}
