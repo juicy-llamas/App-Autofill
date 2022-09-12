@@ -23,7 +23,8 @@ You basically have to:
 Then, your extension will come up as you would expect and you can test it on various sites.
 
 # TODO
-- Decide what the features of our app are going to be
-- Design and create a menu
-- Design a JS script that can scan a forum on a site.
+- Use Issues for progress tracking, also post major stuff here.
+	- Perhaps this will become a CONTRIBUTING.md instead of a TODO.md if we're gonna use issues...
+- Design and create a menu (Jonas / Will)
+- Design a JS script that can *scan, fill, and submit* a forum on a site (Dan).
 - Etc...
