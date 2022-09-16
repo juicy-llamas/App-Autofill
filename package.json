@@ -4,7 +4,8 @@
   "description": "A private project by Daniel Moylan, William Lee, Jeffrey Zhang, and Jonas Lorincz",
   "main": "main.js",
   "scripts": {
-    "test": "sass --watch app/ui/menu/sass_src/style.sass app/ui/menu/css_out/style.css"
+    "watch-sass": "sass --watch app/ui/sass:app/ui/css"
+
   },
   "repository": {
     "type": "git",

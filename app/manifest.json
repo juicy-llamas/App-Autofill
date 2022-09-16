@@ -21,7 +21,7 @@
 
 	"browser_action": {
 		"default_title": "Menu",
-		"default_popup": "ui/menu/menu.html"
+		"default_popup": "ui/splash.html"
 	},
 
 	"permissions": [

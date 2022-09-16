@@ -1,0 +1,94 @@
+@use 'abstracts' as a
+@use '_classes.sass'
+// Convention: Big to small, Top to bottom.
+
+    // font-family: 'Titillium Web', 'Open Sans', sans-serif
+
+#header-title
+    font-size: 30px
+    color: red
+#main-wrapper
+    height: a.$extensionHeight
+    max-height: a.$extensionHeight
+    min-height: a.$extensionHeight
+    min-width: a.$extensionWidth
+    width: a.$extensionWidth
+    max-width: a.$extensionWidth
+    display: grid
+    place-items: center
+    z-index: 10000
+
+#absolute-jobgarden
+    position: absolute
+    top: 0
+    left: 13vw
+    z-index: 100
+
+#splashdiv
+    width: 60%
+    min-height: fit-content
+    border-radius: 9px
+    margin: 0 auto
+    padding: .5rem 1rem
+    padding-bottom: 3px
+    background-color: a.$splashdivColor
+    position: relative
+    z-index: 100
+    *
+        margin: 1rem 0 rem
+    h2
+        padding: 0 .5rem
+        line-height: 110%
+    h2, i
+        width: fit-content
+        margin: 0 auto
+        text-align: center
+        font-size: 32px
+        font-weight: 600
+    p
+        text-align: center
+        color: white
+        font-size: 16px
+        font-weight: 400
+        margin: 1.5rem 0rem
+        line-height: 123%
+
+.center
+    margin-top: 1rem
+    *
+        display: block
+        width: fit-content
+        margin: 1rem auto
+        margin-bottom: 0rem
+
+.signup-btn
+    padding: .5em 1em
+    border-radius: 4px
+    font-family: 'Open Sans', sans-serif
+    font-size: 18px
+    background-color: a.$signUpbutton
+.privacy-link
+    font-family: 'Open Sans', sans-serif
+    color: a.$privacyLinkColor
+    font-size: 12px
+    text-decoration: none
+    &:hover
+        text-decoration: underline
+
+
+
+
+
+
+
+#topRightTriangle
+    position: absolute
+    top: 0
+    right: 0
+    z-index: 7
+#bottomRightTriangle
+    position: absolute
+    bottom: 0
+    right: 0
+    z-index: 6
+
