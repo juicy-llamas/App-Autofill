@@ -26,7 +26,9 @@
 
 	"permissions": [
 		"webRequest",
-		"contextMenus"
+		"webRequestBlocking",
+		"contextMenus",
+		"<all_urls>"
 	],
 
 	"browser_specific_settings": {
