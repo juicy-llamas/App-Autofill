@@ -1,0 +1,72 @@
+@use 'abstracts' as a
+html,body
+    margin: 0px
+    padding: 0px
+    overflow: hidden
+    background-color: a.$backgroundColor
+*
+    font-size: 16px
+    font-family: a.$font-stack
+header
+    display: flex
+    align-items: center
+    justify-content: center
+    padding: 0 20px
+    background-color: a.$headerColor
+    color: white
+    height: a.$headerHeight
+    box-sizing: border-box
+    *
+        height: fit-content
+        margin: 0px 0px
+#header-title
+    font-size: 30px
+    color: white
+
+.jobgarden
+    color: white
+    font-size: 32px
+    font-weight: 600
+    margin: .5rem
+.garden
+    font-size: 32px
+    color: a.$jobGardenGreen
+    font-weight: 400
+    margin: .5rem 0
+
+.tagline
+    text-align: center
+    font-size: 20px
+
+.btn
+    background-color: a.$jobGardenGreen
+    color: white
+    padding: 1em 2em
+    border-radius: 10px
+    width: fit-content
+    text-decoration: none
+    transition: all 50ms linear
+
+#main-wrapper
+    height: a.$wrapperHeight
+    max-height: a.$wrapperHeight
+    min-height: a.$wrapperHeight
+    min-width: a.$extensionWidth
+    width: a.$extensionWidth
+    max-width: a.$extensionWidth
+    overflow-x: hidden
+    overflow-y: scroll
+
+//scrollbar
+    /* width */
+::-webkit-scrollbar
+    width: 10px
+
+/* Track */
+::-webkit-scrollbar-track
+    background: a.$backgroundColor
+
+/* Handle */
+::-webkit-scrollbar-thumb
+    background: a.$scrollbarColor
+    border-radius: 10px
