@@ -7,19 +7,18 @@ html,body
     padding: 0px
     overflow: hidden
     background-color: a.$backgroundColor
-*
-    color: inherit
-    font-size: 16px
 
 header
     display: flex
     align-items: center
-    justify-content: center
-    padding: 0 20px
-    background-color: a.$headerColor
+    justify-content: space-between
+    padding-left: .5rem
+    padding-right: .25rem
+    background-color: a.$backgroundColor
     color: white
     height: a.$headerHeight
     box-sizing: border-box
+    box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px//#78
     *
         height: fit-content
         margin: 0px 0px
@@ -30,12 +29,12 @@ header
     height: a.$wrapperHeight
     max-height: a.$wrapperHeight
     min-height: a.$wrapperHeight
-    min-width: a.$extensionWidth
-    width: a.$extensionWidth
-    max-width: a.$extensionWidth
+    min-width: a.$wrapperWidth
+    width: a.$wrapperWidth
+    max-width: a.$wrapperWidth
     overflow-x: hidden
-    overflow-y: scroll
-    padding: 0 1rem
+    overflow-y: hidden
+    padding: 0 a.$wrapperSidePadding
 
 .tagline
     text-align: center
@@ -46,14 +45,20 @@ header
     grid-template-columns: 1fr
     grid-template-rows: auto
     row-gap: 1rem
-    input
-        width: 100%
-        height: 2rem
-        border: 1px solid rgba(204, 204, 204, 0.4941176471)
-        // border-radius: 8px
-        padding: 2px 10px
-        margin: 0 10px
-        outline: none
-        &:focus-visible
-            border: 1px solid #12a15e
+    justify-content: center
+    align-items: center
+    div
+        max-width: 100%
+        input
+            display: block
+            width: 90%
+            height: 2rem
+            border: 2px solid a.$backgroundColor
+            background-color: a.$inputColor
+            // border-radius: 8px
+            padding: 2px 10px
+            margin: 0 auto
             outline: none
+            &:focus-visible
+                border: 2px solid #12a15e
+                outline: none

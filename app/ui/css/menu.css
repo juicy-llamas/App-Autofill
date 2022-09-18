@@ -1,4 +1,103 @@
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Titillium+Web:ital,wght@0,300;0,400;0,600;0,700;0,900;1,300;1,400;1,600;1,700&display=swap");
+* {
+  font-size: 20px;
+}
+
+h1 {
+  font-size: 52px;
+}
+
+h2 {
+  font-size: 40px;
+}
+
+h3 {
+  font-size: 32px;
+}
+
+h4 {
+  font-size: 24px;
+}
+
+h5 {
+  font-size: 20px;
+}
+
+h6 {
+  font-size: 16px;
+}
+
+p {
+  font-size: 20px;
+}
+
+.font-thin {
+  font-weight: 100;
+}
+
+.font-extralight {
+  font-weight: 200;
+}
+
+.font-light {
+  font-weight: 300;
+}
+
+.font-regular {
+  font-weight: 400;
+}
+
+.font-medium {
+  font-weight: 500;
+}
+
+.font-semibold {
+  font-weight: 600;
+}
+
+.font-bold {
+  font-weight: 700;
+}
+
+.font-extrabold {
+  font-weight: 800;
+}
+
+.font-black {
+  font-weight: 900;
+}
+
+.font-xxs {
+  font-size: 12px;
+}
+
+.font-xs {
+  font-size: 14px;
+}
+
+.font-s {
+  font-size: 16px;
+}
+
+.font-m {
+  font-size: 20px;
+}
+
+.font-l {
+  font-size: 24px;
+}
+
+.font-xl {
+  font-size: 32px;
+}
+
+.font-xxl {
+  font-size: 40px;
+}
+
+.font-xxxl {
+  font-size: 52px;
+}
+
 .btn {
   background-color: #31AF1C;
   color: white;
@@ -14,7 +113,7 @@
   border-radius: 4px;
   font-family: "Open Sans", sans-serif;
   font-size: 18px;
-  background-color: rgba(142, 142, 142, 0.6705882353);
+  background-color: rgba(42, 48, 43, 0.6588235294);
 }
 
 html, body {
@@ -27,26 +126,6 @@ html, body {
 * {
   font-size: 16px;
   font-family: "Titillium Web", "Open Sans", sans-serif;
-}
-
-header {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 20px;
-  background-color: #2c2c2c;
-  color: white;
-  height: 50px;
-  box-sizing: border-box;
-}
-header * {
-  height: fit-content;
-  margin: 0px 0px;
-}
-
-#header-title {
-  font-size: 30px;
-  color: white;
 }
 
 .jobgarden {
@@ -66,6 +145,18 @@ header * {
 .tagline {
   text-align: center;
   font-size: 20px;
+}
+
+#settings {
+  color: #bbbbbb;
+}
+
+.naked-link {
+  color: inherit;
+  text-decoration: none;
+}
+.naked-link:hover {
+  color: inherit;
 }
 
 #main-wrapper {
@@ -90,7 +181,7 @@ header * {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: rgba(145, 145, 145, 0.1921568627);
+  background: rgba(167, 167, 167, 0.1921568627);
   border-radius: 10px;
 }
 
@@ -101,20 +192,17 @@ html, body {
   background-color: #3E4C50;
 }
 
-* {
-  color: inherit;
-  font-size: 16px;
-}
-
 header {
   display: flex;
   align-items: center;
-  justify-content: center;
-  padding: 0 20px;
-  background-color: #2c2c2c;
+  justify-content: space-between;
+  padding-left: 0.5rem;
+  padding-right: 0.25rem;
+  background-color: #3E4C50;
   color: white;
   height: 50px;
   box-sizing: border-box;
+  box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px;
 }
 header * {
   height: fit-content;
@@ -130,11 +218,11 @@ header * {
   height: 550px;
   max-height: 550px;
   min-height: 550px;
-  min-width: 380px;
-  width: 380px;
-  max-width: 380px;
+  min-width: calc(380px - 2rem);
+  width: calc(380px - 2rem);
+  max-width: calc(380px - 2rem);
   overflow-x: hidden;
-  overflow-y: scroll;
+  overflow-y: hidden;
   padding: 0 1rem;
 }
 
@@ -148,17 +236,24 @@ header * {
   grid-template-columns: 1fr;
   grid-template-rows: auto;
   row-gap: 1rem;
+  justify-content: center;
+  align-items: center;
 }
-.field-list input {
-  width: 100%;
+.field-list div {
+  max-width: 100%;
+}
+.field-list div input {
+  display: block;
+  width: 90%;
   height: 2rem;
-  border: 1px solid rgba(204, 204, 204, 0.4941176471);
+  border: 2px solid #3E4C50;
+  background-color: #cccccc;
   padding: 2px 10px;
-  margin: 0 10px;
+  margin: 0 auto;
   outline: none;
 }
-.field-list input:focus-visible {
-  border: 1px solid #12a15e;
+.field-list div input:focus-visible {
+  border: 2px solid #12a15e;
   outline: none;
 }
 
