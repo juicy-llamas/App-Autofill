@@ -1,4 +1,22 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Titillium+Web:ital,wght@0,300;0,400;0,600;0,700;0,900;1,300;1,400;1,600;1,700&display=swap");
+.btn {
+  background-color: #31AF1C;
+  color: white;
+  padding: 1em 2em;
+  border-radius: 10px;
+  width: fit-content;
+  text-decoration: none;
+  transition: all 50ms linear;
+}
+
+.signup-btn {
+  padding: 0.5em 1em;
+  border-radius: 4px;
+  font-family: "Open Sans", sans-serif;
+  font-size: 18px;
+  background-color: rgba(142, 142, 142, 0.6705882353);
+}
+
 html, body {
   margin: 0px;
   padding: 0px;
@@ -50,16 +68,6 @@ header * {
   font-size: 20px;
 }
 
-.btn {
-  background-color: #31AF1C;
-  color: white;
-  padding: 1em 2em;
-  border-radius: 10px;
-  width: fit-content;
-  text-decoration: none;
-  transition: all 50ms linear;
-}
-
 #main-wrapper {
   height: 550px;
   max-height: 550px;
@@ -96,7 +104,6 @@ html, body {
 * {
   color: inherit;
   font-size: 16px;
-  font-family: Helvetica, sans-serif;
 }
 
 header {
