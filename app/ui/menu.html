@@ -2,6 +2,7 @@
 
 <head>
 	<link rel="stylesheet" href="css/menu.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<meta charset="utf-8" />
 	<title>Menu</title>
 </head>
@@ -9,17 +10,22 @@
 <body>
 	<header>
 		<h1 class="jobgarden">Job<span class="garden">Garden</span></h1>
+		<a href="splash.html" class="naked-link"><i class="fa-solid fa-gear fa-2x" id="settings"></i></a>
 	</header>
 	<div id="main-wrapper">
-		<div class="tagline-wrapper"><h2 class="tagline">Before we get started, tell us a little about yourself...</h2></div>
-		<form class="field-list">
-			<div><input type="text" id="fname" placeholder="First Name"></div>
-			<div><input type="text" id="lname"  placeholder="Last Name"></div>
-			<div><input type="text" id="phonenum" placeholder="Phone Number"></div>
-			<div><input type="text" id='emailaddr' placeholder="Email Address"></div>
-			<a href="#" class="btn submit-btn">Punch It!</a href="#">
-		</form>
-		
+		<div class="inner-wrapper">
+			<div class="tagline-wrapper">
+				<h2 class="tagline">Before we get started, tell us a little about yourself...</h2>
+			</div>
+			<form class="field-list">
+				<div><input type="text" id="fname" placeholder="First Name"></div>
+				<div><input type="text" id="lname" placeholder="Last Name"></div>
+				<div><input type="text" id="phonenum" placeholder="Phone Number"></div>
+				<div><input type="text" id='emailaddr' placeholder="Email Address"></div>
+				<a href="#" class="btn submit-btn">Punch It!</a href="#">
+			</form>
+		</div>
+
 	</div>
 </body>
 
