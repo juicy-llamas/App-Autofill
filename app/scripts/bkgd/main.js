@@ -18,14 +18,13 @@ const JobAppAutofill = ( function () {
 			for ( let p = 0; p < main_obj.ports.length; p++ ) {
 				const pp = main_obj.ports[ p ];
 				const origUrl = req.frameAncestors[ 0 ] && req.frameAncestors[ 0 ].url || req.originUrl;
-// 				console.log( `matching ${pp.name} with ${origUrl}` );
 				if ( origUrl.includes( pp.name ) ) {
 					console.log( "matched a request (" + origUrl +") with " + pp.name );
 					if ( pp.__blocking ) {
 						pp.postMessage( { msg: "Blocked request ("+req.url+")", req: req } );
 						return { cancel: true };
 					} else {
-
+// 						pp.postMessage( { msg: "Allowed request ("+req.url+")", req: req } );
 					}
 				}
 			}
@@ -57,19 +56,29 @@ const JobAppAutofill = ( function () {
 			port.__blocking = false;
 			main_obj.ports.push( port );
 			port.postMessage( { msg: "test-server" } );
-
-			port.onMessage.addListener( ( m ) => {
-				console.log( `Tab ${port.name} says ${m.msg}.` );
-				if ( m.block ) port.__blocking = m.block;
-			} );
 		} );
+
+		// Creating browser menu items
+		browser.contextMenus.create( {
+			id: "block-site-https-reqs",
+			type: "checkbox",
+			title: "DEBUG: Block/intercept requests for this site",
+			context: [ "all" ],
+			checked: false
+		}, () => { const err = browser.runtime.lastError; if ( err ) { console.error( "Error encountered creating menu" ); console.error( err ); } } );
+
+		browser.contextMenus.onClicked.addListener( ( info, tab ) => {
+			console.log( `block checkbox marked. Url: ${ tab.url }` );
+			const this_port = main_obj.ports.find( ( p ) => p.name === tab.url );
+			if ( typeof this_port === "object" && this_port !== null ) this_port.__blocking = info.checked;
+		} );
+
 		main_obj.blocker.enableBlocking();
 	};
 
 	Object.defineProperty( main_obj, 'blocker', { value: blocker } );
 	Object.defineProperty( main_obj, 'main', { value: main } );
 	Object.defineProperty( main_obj, 'ports', { value: [] } );
-
 	return main_obj;
 } )();
 

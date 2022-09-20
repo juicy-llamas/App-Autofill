@@ -34,6 +34,7 @@
 		"webRequest",
 		"webRequestBlocking",
 		"contextMenus",
+		"activeTab",
 		"<all_urls>"
 	],
 
