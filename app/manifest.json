@@ -13,12 +13,12 @@
 		{
 			"matches": [ "<all_urls>" ],
 			"js": [ "scripts/cont/page_disp.js" ],
-			"run_at": "document_end"
+			"run_at": "document_idle"
 		},
 		{
 			"matches": [ "<all_urls>" ],
 			"js": [ "scripts/cont/notify.js" ],
-			"run_at": "document_start"
+			"run_at": "document_idle"
 		}
 	],
 	"background": {
@@ -34,7 +34,6 @@
 		"webRequest",
 		"webRequestBlocking",
 		"contextMenus",
-		"activeTab",
 		"<all_urls>"
 	],
 

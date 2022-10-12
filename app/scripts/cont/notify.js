@@ -7,9 +7,7 @@ console.log( "DEBUG: starting notify on " + window.location.href );
  *		- taking user commands from the page (drop down menus) and routing them to the bkgd.
  */
 
-let bport = browser.runtime.connect( { "name": window.location.href } );
-
-bport.onMessage.addListener( ( m ) => {
+browser.runtime.onMessage.addListener( ( m ) => {
 	console.log( "A MESSAGE FROM THE DIVINES:" );
 	console.log( m.msg );
 	if ( m.req ) console.log( req );

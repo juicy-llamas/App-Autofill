@@ -9,29 +9,45 @@ console.log( "DEBUG: starting main" );
 const JobAppAutofill = ( function () {
 	const main_obj = {};
 
+// 	sends a msg to a tab, if tab doesn't exist it returns -1, 0 is success, and -2 is another error (send error?).
+	function __send_msg_tab ( tabid, msg ) {
+		let ret = 0;
+		browser.tabs.sendMessage( tabid, msg ).catch( ( r ) => {
+			if ( false/*error is tab not found*/ ) {
+				ret = -1;
+			} else {
+				console.error( `Failed to send message to ${tabid}:` );
+				console.error( r );
+				ret = -2;
+			}
+		} );
+		return ret;
+	};
+
 	const blocker = ( function () {
 		const ret = {};
 
+		const
+
 // 		blocks the request made, and notifies the tab that had the URL of the infraction.
-// 		Since it does URL matching, it does NOT match any given request made by a tab.
+// 		it checks if there is an entry in blocking for the tab id.
 		function __intercept_request ( req ) {
-			for ( let p = 0; p < main_obj.ports.length; p++ ) {
-				const pp = main_obj.ports[ p ];
-				const origUrl = req.frameAncestors[ 0 ] && req.frameAncestors[ 0 ].url || req.originUrl;
-				if ( origUrl.includes( pp.name ) ) {
-					console.log( "matched a request (" + origUrl +") with " + pp.name );
-					if ( pp.__blocking ) {
-						pp.postMessage( { msg: "Blocked request ("+req.url+")", req: req } );
-						return { cancel: true };
-					} else {
-// 						pp.postMessage( { msg: "Allowed request ("+req.url+")", req: req } );
-					}
-				}
-			}
-			console.log( "did not match request " + req.url );
-			console.log( req );
-			if ( main_obj.block_all )
+			console.log( `DEBUG: request: ${req.url}, ${req.tabId}. blockAll: ${ret.blockAll}` );
+			if ( req.tabId === -1 && ret.blockAll ) {
+				console.log( `Blocked misc request: ${req.url}` );
 				return { cancel: true };
+			} else if ( ret.blockAll || ret.blocking[ req.tabId ] !== undefined ) {
+// 				if the tab doesn't exist for some reason, no use keeping the entry.
+				console.log( "DEBUG: request that came from tab was blocked" );
+				if ( __send_msg_tab( req.tabId, { msg: `Blocked request: ${req.url}`, req: req } ) === -1 ) {
+					delete ret.blocking[ req.tabId ];
+					console.error( "Error: nonexistent tab somehow made a request! Deleted the entry for the tab." );
+// 				otherwise cancel the req (msg is sent)
+				}
+				console.log( "we got here" );
+				return { cancel: true };
+			} else
+				console.log( `DEBUG: not blocked--block val for tab is ${ret.blocking[ req.tabId ]}` );
 		}
 
 		const enableBlocking = () => browser.webRequest.onBeforeRequest.addListener(
@@ -43,42 +59,87 @@ const JobAppAutofill = ( function () {
 		const disableBlocking = () =>
 			browser.webRequest.onBeforeRequest.removeListener( __intercept_request );
 
+		const unload = () => {
+
+			disableBlocking();
+		};
+
+		const main = () => {
+// 			menu item to block for cur tab
+			browser.contextMenus.create( {
+				id: "b-tab",
+				type: "normal",
+				title: "DEBUG: Block/intercept requests for this tab",
+				contexts: [ "all" ],
+				checked: false
+			}, () => { const err = browser.runtime.lastError; if ( err ) { console.error( "Error encountered creating menu" ); console.error( err ); } } );
+//			menu item to whitelist tab
+			browser.contextMenus.create( {
+				id: "b-stp",
+				type: "normal",
+				title: "DEBUG: STOP blocking requests for this tab",
+				contexts: [ "all" ],
+				checked: false
+			}, () => { const err = browser.runtime.lastError; if ( err ) { console.error( "Error encountered creating menu" ); console.error( err ); } } );
+//			menu item to whitelist tab
+			browser.contextMenus.create( {
+				id: "b-clr",
+				type: "normal",
+				title: "DEBUG: Clear tab block list",
+				contexts: [ "all" ],
+				checked: false
+			}, () => { const err = browser.runtime.lastError; if ( err ) { console.error( "Error encountered creating menu" ); console.error( err ); } } );
+// 			menu item to block for all tabs
+			browser.contextMenus.create( {
+				id: "b-all",
+				type: "checkbox",
+				title: "DEBUG: Block everything",
+				contexts: [ "all" ],
+				checked: false
+			}, () => { const err = browser.runtime.lastError; if ( err ) { console.error( "Error encountered creating menu" ); console.error( err ); } } );
+// 			clicking on the menu items.
+			browser.contextMenus.onClicked.addListener( ( info, tab ) => {
+				console.warn( `block checkbox marked. Url: ${tab.url}` );
+				if ( tab.id === browser.tabs.TAB_ID_NONE )
+					return;
+
+				switch ( info.menuItemId ) {
+					case "b-tab":
+						if ( info.checked )
+							ret.blocking[ tab.id ] = true;
+						else
+							delete ret.blocking[ tab.id ];
+						console.log( ret.blocking );
+						break;
+					case "b-all":
+						ret.blockAll = info.checked;
+						console.log( ret.blockAll );
+						break;
+					default:
+						console.error( "A menu item was clicked other than specified ones!" );
+						break;
+				}
+			} );
+
+// 			turn on blocking by default
+			enableBlocking();
+		};
+
 // 		Using Object.defineProperty( ret, bla... vs ret.bla =... makes the properties read only and unmutable.
+		Object.defineProperty( ret, 'main', { value: main } );
 		Object.defineProperty( ret, 'enableBlocking', { value: enableBlocking } );
 		Object.defineProperty( ret, 'disableBlocking', { value: disableBlocking } );
-		Object.defineProperty( ret, 'blockAll', { value: false, writeable: true } );
+		Object.defineProperty( ret, 'blockAll', { value: false, writable: true } );
+		Object.defineProperty( ret, 'blocking', { value: {}, writable: true } );
 		return ret;
 	} )();
 
 	const main = () => {
-		browser.runtime.onConnect.addListener( ( port ) => {
-			console.log( 'connected to tab: ' + port.name );
-			port.__blocking = false;
-			main_obj.ports.push( port );
-			port.postMessage( { msg: "test-server" } );
-		} );
-
-		// Creating browser menu items
-		browser.contextMenus.create( {
-			id: "block-site-https-reqs",
-			type: "checkbox",
-			title: "DEBUG: Block/intercept requests for this site",
-			context: [ "all" ],
-			checked: false
-		}, () => { const err = browser.runtime.lastError; if ( err ) { console.error( "Error encountered creating menu" ); console.error( err ); } } );
-
-		browser.contextMenus.onClicked.addListener( ( info, tab ) => {
-			console.log( `block checkbox marked. Url: ${ tab.url }` );
-			const this_port = main_obj.ports.find( ( p ) => p.name === tab.url );
-			if ( typeof this_port === "object" && this_port !== null ) this_port.__blocking = info.checked;
-		} );
-
-		main_obj.blocker.enableBlocking();
+		main_obj.blocker.main();
 	};
 
 	Object.defineProperty( main_obj, 'blocker', { value: blocker } );
 	Object.defineProperty( main_obj, 'main', { value: main } );
-	Object.defineProperty( main_obj, 'ports', { value: [] } );
 	return main_obj;
 } )();
 
